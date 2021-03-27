@@ -1,18 +1,21 @@
 <template>
   <div class="nav">
     <router-link to="/money">
+      <icon name="label"></icon>
       money
-      <svg>
-        <use xlink:href="#label"></use>
-      </svg> </router-link
-    >| <router-link to="/labels">labels</router-link>|
-    <router-link to="/statistic">statistic</router-link>
+    </router-link>
+    <router-link to="/labels">
+      <icon name="money"></icon>
+      labels
+    </router-link>
+    <router-link to="/statistic">
+      <icon name="statistics"></icon>
+      static
+    </router-link>
   </div>
 </template>
 
 <script lang="ts">
-// import x from "@/assets/icons/label.svg";
-// console.log(x);
 export default {
   name: "Nav",
 };
