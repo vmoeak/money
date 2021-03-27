@@ -1,0 +1,16 @@
+<template>
+  <div>
+    <router-link to="/money">money</router-link>|
+    <router-link to="/labels">labels</router-link>|
+    <router-link to="/statistic">statistic</router-link>
+  </div>
+</template>
+
+<script lang="ts">
+export default {
+  name: "Nav",
+};
+</script>
+
+<style lang="scss" scoped>
+</style>
