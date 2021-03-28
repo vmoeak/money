@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="navWrapper">
-      <div class="content">
+      <div class="content" :class="classFix && `${classFix}-content`">
         <slot></slot>
       </div>
       <Nav />
@@ -12,6 +12,7 @@
 <script lang="ts">
 export default {
   name: "Layout",
+  props: ["classFix"],
 };
 </script>
 
@@ -20,7 +21,6 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  border: 1px solid green;
   .content {
     flex-grow: 1;
     overflow: hidden;
