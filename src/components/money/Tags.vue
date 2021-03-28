@@ -1,57 +1,47 @@
 <template>
   <div class="tags">
     <ul class="current">
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
+      <li
+        v-for="tag in dataSource"
+        :key="tag"
+        @click="toggle(tag)"
+        :class="{ selected: SelectedTags.indexOf(tag) >= 0 }"
+      >
+        {{ tag }}
+      </li>
     </ul>
     <div class="new">
-      <button>新增标签</button>
+      <button @click="add">新增标签</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  name: "Tags",
-};
+import Vue from "vue";
+import { Component, Prop } from "vue-property-decorator";
+@Component
+export default class Tags extends Vue {
+  @Prop(Array) readonly dataSource: string[] | undefined;
+  SelectedTags: string[] = [];
+  toggle(tag: string) {
+    const index = this.SelectedTags.indexOf(tag);
+    if (index >= 0) {
+      this.SelectedTags.splice(index, 1);
+      return;
+    }
+    this.SelectedTags.push(tag);
+  }
+  add() {
+    const name = prompt("请输入标签名称");
+    if (!name) {
+      alert("内容不能为空");
+      return;
+    }
+    if (this.dataSource) {
+      this.$emit("update:dataSource", [...this.dataSource, name]);
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -76,6 +66,9 @@ export default {
       padding: 0 16px;
       margin-right: 12px;
       margin-bottom: 4px;
+      &.selected {
+        background: red;
+      }
     }
   }
   > .new {
