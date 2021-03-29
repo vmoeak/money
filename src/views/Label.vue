@@ -10,7 +10,7 @@
         </li>
       </ul>
       <div class="create-tag-wrapper">
-        <Button @click="add"> 编辑按钮 </Button>
+        <Button @click="add"> 新增标签 </Button>
       </div>
     </Layout>
   </div>
@@ -29,6 +29,7 @@ export default class Label extends Vue {
   labels = labelListModel.data;
   add() {
     const name = prompt("请输入标签名称");
+    console.log(name);
     if (name) {
       const message = labelListModel.create(name);
       if (message === "duplicated") {
@@ -38,7 +39,7 @@ export default class Label extends Vue {
       }
       return;
     }
-    alert("输入内容不能为空");
+    if (name === "") alert("输入内容不能为空");
   }
 }
 </script>

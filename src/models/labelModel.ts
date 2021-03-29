@@ -1,3 +1,4 @@
+import { createId } from "@/util";
 const localStorageKey = "labelList";
 type Tag = {
   name: string;
@@ -20,9 +21,10 @@ const labelListModel: labelModel = {
   create(name) {
     const tags = this.data.map((item) => item.name);
     if (tags.indexOf(name) >= 0) return "duplicated";
+    const id = createId().toString();
     const tag: Tag = {
       name,
-      id: name,
+      id,
     };
     this.data.push(tag);
     this.save(this.data);

@@ -47,7 +47,12 @@ export default class EditLabel extends Vue {
   }
   remove() {
     if (this.label) {
-      labelModel.remove(this.label.id);
+      const message = labelModel.remove(this.label.id);
+      if (message === "success") {
+        this.$router.back();
+      } else {
+        alert("删除失败");
+      }
     }
   }
   goBack() {
