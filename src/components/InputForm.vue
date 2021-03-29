@@ -1,8 +1,8 @@
 <template>
   <div>
     <label class="notes">
-      <span class="name">备注</span>
-      <input type="text" placeholder="输入备注" v-model="notes" />
+      <span class="name">{{ labelName }}</span>
+      <input type="text" :placeholder="placeHolder" v-model="notes" />
     </label>
   </div>
 </template>
@@ -13,6 +13,8 @@ import { Component, Watch, Prop } from "vue-property-decorator";
 @Component
 export default class Note extends Vue {
   @Prop(String) value!: string;
+  @Prop() labelName!: string;
+  @Prop() placeHolder?: string;
   notes = this.value;
   @Watch("notes")
   onValueChange(newValue: string) {
@@ -24,7 +26,6 @@ export default class Note extends Vue {
 <style lang="scss" scoped>
 .notes {
   font-size: 14px;
-  background: #f5f5f5;
   display: block;
   display: flex;
   padding-left: 16px;
@@ -33,7 +34,7 @@ export default class Note extends Vue {
     padding-right: 16px;
   }
   input {
-    height: 64px;
+    height: 40px;
     border: none;
     background: transparent;
     padding-right: 16px;
