@@ -1,7 +1,7 @@
 <template>
   <div>
     <Layout class-fix="layout">
-      <tages :data-source.sync="record.tags" />
+      <tages :data-source="labelList" :selected-labs.sync="record.tags" />
       <note :value.sync="record.notes" />
       <types :value.sync="record.type" />
       <number-pad :value.sync="record.amount" />
@@ -17,23 +17,28 @@ import Note from "@/components/money/Note.vue";
 import Types from "@/components/money/Types.vue";
 import NumberPad from "@/components/money/NumberPad.vue";
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
-type Record = {
-  tags: string[];
-  notes: string;
-  type: string;
-  amount: number;
-};
+import { Component, Watch } from "vue-property-decorator";
+import model from "@/models/recordLIstModel";
+import labelListModel from "@/models/labelModel";
+const records = model.fetch();
+labelListModel.fetch();
 @Component({
   components: { Layout, Tages, Note, Types, NumberPad },
 })
 export default class Money extends Vue {
-  record: Record = {
-    tags: ["衣", "食", "住"],
-    notes: "vmoeak",
+  labelList = labelListModel.data;
+  record: RecordItem = {
+    tags: [],
+    notes: "",
     type: "-",
     amount: 0,
   };
+  @Watch("record.amount")
+  onSubmit() {
+    this.record.time = new Date();
+    records.push(model.clone(this.record));
+    model.save(records);
+  }
 }
 </script>
 <style lang="sass">

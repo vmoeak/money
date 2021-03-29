@@ -22,7 +22,7 @@
 
 <script lang='ts'>
 import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
+import { Component, Prop, Watch } from "vue-property-decorator";
 @Component
 export default class NumberPad extends Vue {
   @Prop(Number) value!: number;
@@ -56,6 +56,7 @@ export default class NumberPad extends Vue {
   }
   ok() {
     this.$emit("update:value", parseFloat(this.output));
+    this.output = "0";
   }
 }
 </script>
