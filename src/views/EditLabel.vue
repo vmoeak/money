@@ -32,14 +32,13 @@ labelModel.fetch();
   components: { InputForm, Button, Layout },
 })
 export default class EditLabel extends Vue {
-  label?: { id: string; name: string } = undefined;
+  get label() {
+    return this.$store.state.currentLabel;
+  }
   created() {
     const id = this.$route.params.id;
-    const label = labelModel.data.find((item) => {
-      return item.id === id;
-    });
-    if (!label) this.$router.replace("/404");
-    this.label = label;
+    this.$store.commit("findTag", id);
+    if (!this.label) this.$router.replace("/404");
   }
   update(name: string) {
     if (!this.label || !name) return;

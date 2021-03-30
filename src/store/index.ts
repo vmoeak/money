@@ -3,12 +3,18 @@ import Vuex, { Store } from "vuex";
 import { clone, createId } from "@/util";
 
 Vue.use(Vuex);
+type myState = {
+  recordList: RecordItem[];
+  labelList: Tag[];
+  currentTag?: Tag;
+};
 
 export default new Vuex.Store({
   state: {
     recordList: [] as RecordItem[],
     labelList: [] as Tag[],
-  },
+    currentTag: undefined,
+  } as myState,
   mutations: {
     fetchRecordList(state) {
       return (state.recordList = JSON.parse(
@@ -63,6 +69,11 @@ export default new Vuex.Store({
       } else {
         return "unknown label";
       }
+    },
+    findTag(state, id: string) {
+      state.currentTag = state.labelList.find((item) => {
+        return item.id === id;
+      });
     },
   },
 });

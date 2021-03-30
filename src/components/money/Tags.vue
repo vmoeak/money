@@ -21,14 +21,11 @@ import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
 import createTag from "@/mixins/createTag";
-@Component({
-  computed: {
-    tagList() {
-      return this.$store.state.labelList;
-    },
-  },
-})
+@Component
 export default class Tags extends mixins(createTag) {
+  get tagList() {
+    return this.$store.state.labelList;
+  }
   @Prop(Array) readonly selectedLabs!: string[];
   selectedTags: string[] = this.selectedLabs;
   created() {

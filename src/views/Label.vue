@@ -24,13 +24,11 @@ import createTag from "@/mixins/createTag";
 import Button from "@/components/Button.vue";
 @Component({
   components: { Button },
-  computed: {
-    labelList() {
-      return this.$store.state.labelList;
-    },
-  },
 })
 export default class Label extends mixins(createTag) {
+  get labelList() {
+    return this.$store.state.labelList;
+  }
   created() {
     this.$store.commit("fetchLabelList");
   }
