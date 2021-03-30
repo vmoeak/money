@@ -1,7 +1,7 @@
 <template>
   <div>
     <Layout class-fix="layout">
-      <tages :data-source="labelList" :selected-labs.sync="record.tags" />
+      <tages :selected-labs.sync="record.tags" />
       <div class="input-wrapper">
         <input-form
           :value.sync="record.notes"
@@ -23,14 +23,10 @@ import Types from "@/components/money/Types.vue";
 import NumberPad from "@/components/money/NumberPad.vue";
 import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
-import labelListModel from "@/models/labelModel";
-labelListModel.fetch();
 @Component({
   components: { Layout, Tages, InputForm, Types, NumberPad },
 })
 export default class Money extends Vue {
-  labelList = labelListModel.data;
-
   record: RecordItem = {
     tags: [],
     notes: "",

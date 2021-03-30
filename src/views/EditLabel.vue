@@ -24,10 +24,8 @@
 import Layout from "@/components/Layout.vue";
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import labelModel from "@/models/labelModel";
 import InputForm from "@/components/InputForm.vue";
 import Button from "@/components/Button.vue";
-labelModel.fetch();
 @Component({
   components: { InputForm, Button, Layout },
 })
