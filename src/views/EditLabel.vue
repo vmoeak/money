@@ -9,7 +9,7 @@
         <input-form
           labelName="标签名"
           placeHolder="请输入标签名"
-          :value="label.name"
+          :value="label && label.name"
           @update:value="update"
         ></input-form>
       </div>
@@ -33,25 +33,21 @@ labelModel.fetch();
 })
 export default class EditLabel extends Vue {
   get label() {
-    return this.$store.state.currentLabel;
+    return this.$store.state.currentTag;
   }
   created() {
+    this.$store.commit("fetchLabelList");
     const id = this.$route.params.id;
     this.$store.commit("findTag", id);
     if (!this.label) this.$router.replace("/404");
   }
   update(name: string) {
     if (!this.label || !name) return;
-    labelModel.update(name, this.label.id);
+    this.$store.commit("updateLabel", { name, id: this.label.id });
   }
   remove() {
     if (this.label) {
-      const message = labelModel.remove(this.label.id);
-      if (message === "success") {
-        this.$router.back();
-      } else {
-        alert("删除失败");
-      }
+      this.$store.commit("removeLabel", this.label.id);
     }
   }
   goBack() {

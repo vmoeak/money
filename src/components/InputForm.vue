@@ -15,7 +15,7 @@ export default class Note extends Vue {
   @Prop(String) value!: string;
   @Prop() labelName!: string;
   @Prop() placeHolder?: string;
-  notes = this.value;
+  notes = this.value || "";
   @Watch("notes")
   onValueChange(newValue: string) {
     this.$emit("update:value", newValue);

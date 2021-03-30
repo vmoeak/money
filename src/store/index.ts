@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex, { Store } from "vuex";
 import { clone, createId } from "@/util";
+import router from "@/router";
 
 Vue.use(Vuex);
 type myState = {
@@ -17,9 +18,7 @@ export default new Vuex.Store({
   } as myState,
   mutations: {
     fetchRecordList(state) {
-      return (state.recordList = JSON.parse(
-        localStorage.getItem("recordList") || "[]"
-      ) as RecordItem[]);
+      state.recordList = JSON.parse(localStorage.getItem("recordList") || "[]");
     },
     saveRecordList(state) {
       localStorage.setItem("recordList", JSON.stringify(state.recordList));
@@ -29,9 +28,7 @@ export default new Vuex.Store({
       state.recordList.push(clone(data));
     },
     fetchLabelList(state) {
-      return (state.labelList = JSON.parse(
-        localStorage.getItem("labelList") || "[]"
-      ));
+      state.labelList = JSON.parse(localStorage.getItem("labelList") || "[]");
     },
     createLabel(state, name: string) {
       const tags = state.labelList.map((item) => item.name);
@@ -44,30 +41,30 @@ export default new Vuex.Store({
       state.labelList.push(tag);
       alert("添加标签成功");
       saveLabelList(state.labelList);
-      return "success";
     },
-    remove(state, id: string) {
+    removeLabel(state, id: string) {
       const index = state.labelList.findIndex((item) => item.id === id);
       if (index >= 0) {
         state.labelList.splice(index, 1);
         saveLabelList(state.labelList);
         alert("删除标签成功");
-        return "success";
+        router.back();
+      } else {
+        alert("未找到标签");
       }
-      return "unknown label";
     },
-    updateLabel(state, { name, id }) {
+    updateLabel(state, payload: { name: string; id: string }) {
+      const { name, id } = payload;
       const duplicatedIndex = state.labelList.findIndex(
         (item) => item.name === name
       );
-      if (duplicatedIndex >= 0) return "duplicated";
+      if (duplicatedIndex >= 0) alert("标签名重复");
       const index = state.labelList.findIndex((item) => item.id === id);
       if (index >= 0) {
         state.labelList[index].name = name;
         saveLabelList(state.labelList);
-        return "success";
       } else {
-        return "unknown label";
+        alert("未找到标签");
       }
     },
     findTag(state, id: string) {
