@@ -11,7 +11,7 @@
       </li>
     </ul>
     <div class="new">
-      <button @click="add">新增标签</button>
+      <button @click="createLabel">新增标签</button>
     </div>
   </div>
 </template>
@@ -19,6 +19,8 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
+import { mixins } from "vue-class-component";
+import createTag from "@/mixins/createTag";
 @Component({
   computed: {
     tagList() {
@@ -26,7 +28,7 @@ import { Component, Prop, Watch } from "vue-property-decorator";
     },
   },
 })
-export default class Tags extends Vue {
+export default class Tags extends mixins(createTag) {
   @Prop(Array) readonly selectedLabs!: string[];
   selectedTags: string[] = this.selectedLabs;
   created() {
@@ -39,14 +41,6 @@ export default class Tags extends Vue {
       return;
     }
     this.selectedTags.push(tag);
-  }
-  add() {
-    const name = prompt("请输入标签名称");
-    if (name) {
-      this.$store.commit("createLabel", name);
-      return;
-    }
-    if (name === "") alert("输入内容不能为空");
   }
   @Watch("selectedTags")
   onUpdateSelectedTags(value: string[]) {

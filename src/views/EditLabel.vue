@@ -29,7 +29,7 @@ import InputForm from "@/components/InputForm.vue";
 import Button from "@/components/Button.vue";
 labelModel.fetch();
 @Component({
-  components: { InputForm, Button },
+  components: { InputForm, Button, Layout },
 })
 export default class EditLabel extends Vue {
   label?: { id: string; name: string } = undefined;
