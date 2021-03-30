@@ -21,7 +21,6 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import labelListModel from "@/models/labelModel";
 import Button from "@/components/Button.vue";
-labelListModel.fetch();
 @Component({
   components: { Button },
 })
@@ -29,7 +28,6 @@ export default class Label extends Vue {
   labels = labelListModel.data;
   add() {
     const name = prompt("请输入标签名称");
-    console.log(name);
     if (name) {
       const message = labelListModel.create(name);
       if (message === "duplicated") {

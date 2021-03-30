@@ -6,4 +6,8 @@ function createId() {
   return id;
 }
 
-export { createId };
+function clone(data: any) {
+  return JSON.parse(JSON.stringify(data));
+}
+
+export { createId, clone };

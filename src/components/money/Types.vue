@@ -26,7 +26,6 @@ export default class Types extends Vue {
   }
   @Watch("type")
   onTypeChange(changeValue: string) {
-    console.log("change");
     this.$emit("update:value", changeValue);
   }
 }

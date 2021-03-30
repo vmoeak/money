@@ -23,26 +23,27 @@ import Types from "@/components/money/Types.vue";
 import NumberPad from "@/components/money/NumberPad.vue";
 import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
-import model from "@/models/recordLIstModel";
 import labelListModel from "@/models/labelModel";
-const records = model.fetch();
 labelListModel.fetch();
 @Component({
   components: { Layout, Tages, InputForm, Types, NumberPad },
 })
 export default class Money extends Vue {
   labelList = labelListModel.data;
+
   record: RecordItem = {
     tags: [],
     notes: "",
     type: "-",
     amount: 0,
   };
+  created() {
+    this.$store.commit("fetchRecordList");
+  }
   @Watch("record.amount")
   onSubmit() {
-    this.record.time = new Date();
-    records.push(model.clone(this.record));
-    model.save(records);
+    this.$store.commit("createRecord", this.record);
+    this.$store.commit("saveRecordList");
   }
 }
 </script>

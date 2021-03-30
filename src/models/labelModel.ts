@@ -55,5 +55,4 @@ const labelListModel: labelModel = {
     localStorage.setItem(localStorageKey, JSON.stringify(data));
   },
 };
-
 export default labelListModel;
