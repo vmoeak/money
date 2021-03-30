@@ -42,11 +42,11 @@ export default class Tags extends Vue {
   }
   add() {
     const name = prompt("请输入标签名称");
-    if (!name) {
-      alert("内容不能为空");
+    if (name) {
+      this.$store.commit("createLabel", name);
       return;
     }
-    this.$store.commit("createLabel", name);
+    if (name === "") alert("输入内容不能为空");
   }
   @Watch("selectedTags")
   onUpdateSelectedTags(value: string[]) {

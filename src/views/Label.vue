@@ -2,7 +2,7 @@
   <div>
     <Layout>
       <ul class="tagList">
-        <li v-for="label in labels" :key="label.id">
+        <li v-for="label in labelList" :key="label.id">
           <router-link :to="`/labels/edit/${label.id}`" class="tag">
             <span>{{ label.name }}</span>
             <icon name="arrow" />
@@ -19,22 +19,23 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import labelListModel from "@/models/labelModel";
 import Button from "@/components/Button.vue";
 @Component({
   components: { Button },
+  computed: {
+    labelList() {
+      return this.$store.state.labelList;
+    },
+  },
 })
 export default class Label extends Vue {
-  labels = labelListModel.data;
+  created() {
+    this.$store.commit("fetchLabelList");
+  }
   add() {
     const name = prompt("请输入标签名称");
     if (name) {
-      const message = labelListModel.create(name);
-      if (message === "duplicated") {
-        alert("标签名重复");
-      } else if (message === "success") {
-        alert("添加标签成功");
-      }
+      this.$store.commit("createLabel", name);
       return;
     }
     if (name === "") alert("输入内容不能为空");
