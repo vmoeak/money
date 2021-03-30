@@ -9,7 +9,7 @@
           place-holder="请输入备注"
         />
       </div>
-      <types :value.sync="record.type" />
+      <tab :value.sync="record.type" class-fix="type" :data-source="typeList" />
       <number-pad :value.sync="record.amount" />
     </Layout>
   </div>
@@ -19,12 +19,13 @@
 import Layout from "@/components/Layout.vue";
 import Tages from "@/components/money/Tags.vue";
 import InputForm from "@/components/InputForm.vue";
-import Types from "@/components/money/Types.vue";
+import Tab from "@/components/Tab.vue";
 import NumberPad from "@/components/money/NumberPad.vue";
 import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
+import { typeList } from "@/constant";
 @Component({
-  components: { Layout, Tages, InputForm, Types, NumberPad },
+  components: { Layout, Tages, InputForm, Tab, NumberPad },
 })
 export default class Money extends Vue {
   record: RecordItem = {
@@ -33,6 +34,7 @@ export default class Money extends Vue {
     type: "-",
     amount: 0,
   };
+  typeList = typeList;
   created() {
     this.$store.commit("fetchRecordList");
   }

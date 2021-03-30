@@ -1,11 +1,17 @@
 <template>
   <div>
     <ul class="types">
-      <li :class="value === '-' && 'selected'" @click="seletedType('-')">
-        支出
-      </li>
-      <li :class="value === '+' && 'selected'" @click="seletedType('+')">
-        收入
+      <li
+        v-for="item in dataSource"
+        :key="item.value"
+        class="types-item"
+        :class="{
+          selected: value === item.value,
+          [classFix + '-item']: classFix,
+        }"
+        @click="seletedType(item.value)"
+      >
+        {{ item.text }}
       </li>
     </ul>
   </div>
@@ -17,11 +23,13 @@ import { Component, Prop, Watch } from "vue-property-decorator";
 @Component
 export default class Types extends Vue {
   @Prop(String) readonly value!: string;
+  @Prop() readonly classFix?: string;
+  @Prop({ required: true, type: Array }) dataSource!: {
+    text: string;
+    value: string;
+  }[];
   type = this.value;
   seletedType(type: string) {
-    if (type !== "-" && type !== "+") {
-      throw new Error("类型错误");
-    }
     this.type = type;
   }
   @Watch("type")
@@ -37,7 +45,7 @@ export default class Types extends Vue {
   display: flex;
   text-align: center;
   font-size: 24px;
-  > li {
+  &-item {
     width: 50%;
     height: 64px;
     display: flex;
