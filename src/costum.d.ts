@@ -5,3 +5,8 @@ type RecordItem = {
   amount: number;
   time?: Date;
 };
+
+type Tag = {
+  name: string;
+  id: string;
+};

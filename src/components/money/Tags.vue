@@ -2,7 +2,7 @@
   <div class="tags">
     <ul class="current">
       <li
-        v-for="tag in dataSource"
+        v-for="tag in tagList"
         :key="tag.id"
         @click="toggle(tag)"
         :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
@@ -19,12 +19,19 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
-import labelListModel from "@/models/labelModel";
-@Component
+@Component({
+  computed: {
+    tagList() {
+      return this.$store.state.labelList;
+    },
+  },
+})
 export default class Tags extends Vue {
-  @Prop(Array) readonly dataSource!: string[];
   @Prop(Array) readonly selectedLabs!: string[];
   selectedTags: string[] = this.selectedLabs;
+  created() {
+    this.$store.commit("fetchLabelList");
+  }
   toggle(tag: string) {
     const index = this.selectedTags.indexOf(tag);
     if (index >= 0) {
@@ -39,13 +46,7 @@ export default class Tags extends Vue {
       alert("内容不能为空");
       return;
     }
-    const message = labelListModel.create(name);
-    if (message === "duplicated") {
-      alert("标签名字重复");
-      return;
-    } else if (message === "success") {
-      alert("添加标签成功");
-    }
+    this.$store.commit("createLabel", name);
   }
   @Watch("selectedTags")
   onUpdateSelectedTags(value: string[]) {
