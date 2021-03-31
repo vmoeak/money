@@ -24,7 +24,7 @@ export default new Vuex.Store({
       localStorage.setItem("recordList", JSON.stringify(state.recordList));
     },
     createRecord(state, data: RecordItem) {
-      data.time = new Date();
+      data.time = new Date().toISOString();
       state.recordList.push(clone(data));
     },
     fetchLabelList(state) {

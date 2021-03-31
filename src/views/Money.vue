@@ -45,13 +45,14 @@ export default class Money extends Vue {
   }
 }
 </script>
-<style lang="sass">
-.layout-content
-  display: flex
-  flex-direction: column
-</style>
 <style lang="scss" scoped>
 .input-wrapper {
   padding: 12px 0;
+}
+::v-deep {
+  .layout-content {
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>
