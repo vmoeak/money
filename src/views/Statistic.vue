@@ -58,9 +58,15 @@ export default class Statistic extends Vue {
     if (!this.recordList || this.recordList.length === 0) return [];
     const hashTable: { title: string; items: RecordItem[] }[] = [];
     const recordList = clone(this.recordList) as RecordItem[];
-    const sortedList = recordList
-      .filter((item) => item.type === this.typeValue)
-      .sort((a, b) => dayjs(b.time).valueOf() - dayjs(a.time).valueOf());
+    const filterList = recordList.filter(
+      (item) => item.type === this.typeValue
+    );
+    if (filterList.length === 0) {
+      return;
+    }
+    const sortedList = filterList.sort(
+      (a, b) => dayjs(b.time).valueOf() - dayjs(a.time).valueOf()
+    );
     if (sortedList.length === 0) return [];
     console.log(sortedList, "sortedList");
     hashTable.push({
