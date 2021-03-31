@@ -14,5 +14,11 @@ module.exports = {
 
     config.plugin('svg-sprite').use(require('svg-sprite-loader/plugin'), [{plainSprite: true}])
     config.module.rule('svg').exclude.add(dir)
+  },
+  devServer: {
+    //host: '0.0.0.0',
+    public: '192.168.10.124:8080',//修改这里
+    https: false,
+    hotOnly: false,
   }
 }

@@ -59,7 +59,8 @@ export default class Tags extends mixins(createTag) {
     display: flex;
     flex-wrap: wrap;
     overflow: auto;
-    max-height: 84px;
+    flex-grow: 1;
+    height: 0;
     margin-right: -5px;
     > li {
       background: #d9d9d9;

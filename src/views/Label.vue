@@ -60,4 +60,9 @@ export default class Label extends mixins(createTag) {
   text-align: center;
   margin-top: 44px;
 }
+.create-tag-wrapper::after {
+  content: "";
+  display: block;
+  height: 10px;
+}
 </style>
