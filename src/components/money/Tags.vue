@@ -52,6 +52,7 @@ export default class Tags extends mixins(createTag) {
   font-size: 14px;
   padding: 16px;
   flex-grow: 1;
+  height: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -59,8 +60,6 @@ export default class Tags extends mixins(createTag) {
     display: flex;
     flex-wrap: wrap;
     overflow: auto;
-    flex-grow: 1;
-    height: 0;
     margin-right: -5px;
     > li {
       background: #d9d9d9;
