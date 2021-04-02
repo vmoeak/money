@@ -32,6 +32,7 @@
           </ul>
         </li>
       </ul>
+      <echart></echart>
     </Layout>
   </div>
 </template>
@@ -39,12 +40,13 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import tab from "@/components/Tab.vue";
+import Tab from "@/components/Tab.vue";
 import { typeList, dateList } from "@/constant";
 import dayjs from "dayjs";
 import { clone } from "@/util";
+import Echart from "@/components/Echart.vue";
 @Component({
-  components: { tab },
+  components: { Tab, Echart },
 })
 export default class Statistic extends Vue {
   typeValue = "-";
@@ -68,7 +70,6 @@ export default class Statistic extends Vue {
       (a, b) => dayjs(b.time).valueOf() - dayjs(a.time).valueOf()
     );
     if (sortedList.length === 0) return [];
-    console.log(sortedList, "sortedList");
     hashTable.push({
       title: sortedList[0].time!,
       items: [sortedList[0]],
@@ -80,7 +81,6 @@ export default class Statistic extends Vue {
           "day"
         )
       ) {
-        console.log("is true");
         hashTable[hashTable.length - 1].items.push(sortedList[i]);
       } else {
         hashTable.push({
