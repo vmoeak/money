@@ -110,7 +110,6 @@ export default class Statistic extends Vue {
     return hashTable;
   }
   get resultList() {
-    console.log("enter resultList", this.groupedList);
     if (this.groupedList.length === 0) return [];
     if (this.dateValue === "day") {
       return this.groupedList.filter((item) => {
@@ -119,10 +118,6 @@ export default class Statistic extends Vue {
     }
     if (this.dateValue === "month") {
       return this.groupedList.filter((item) => {
-        console.log(
-          this.selectedDate.format("YYYY-MM-DD"),
-          "resultLIst selectedDate"
-        );
         return dayjs(item.title).isSame(dayjs(this.selectedDate), "month");
       });
     }
@@ -149,8 +144,6 @@ export default class Statistic extends Vue {
     return "";
   }
   get echartsLineData() {
-    // console.log("enter echartsLineData");
-    // console.log("this.dateValue00000", this.dateValue);/
     if (this.dateValue === "day") return {};
     type dataSource = {
       data: string[];
@@ -158,7 +151,6 @@ export default class Statistic extends Vue {
     };
     const list: dataSource = { data: [], amount: [] };
     if (this.dateValue === "month") {
-      console.log("enter month");
       const days = dayjs(this.selectedDate).daysInMonth();
       let j = 0;
       let length = this.resultList.length;
@@ -174,7 +166,6 @@ export default class Statistic extends Vue {
           list.amount.unshift("0");
         }
       }
-      console.log("datasource00000", list);
     } else {
       let length = this.resultList.length;
       let j = 0;
@@ -309,12 +300,8 @@ export default class Statistic extends Vue {
     this.isOpen = true;
   }
   closePannel(value: any) {
-    console.log(value);
+    if (!value) return;
     this.selectedDate = value;
-    console.log(
-      this.selectedDate.format("YYYY-MM-DD"),
-      "this.selectedData0000000"
-    );
     this.isOpen = false;
   }
   handleOpenChange(open: any) {
