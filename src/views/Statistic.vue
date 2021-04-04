@@ -255,8 +255,6 @@ export default class Statistic extends Vue {
     for (let key in list) {
       soureData.push({ name: key, value: list[key] });
     }
-    console.log("sourdata", soureData);
-    console.log(list, "list12345565666777");
     return {
       grid: {
         top: 100,

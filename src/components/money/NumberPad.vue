@@ -59,13 +59,12 @@ export default class NumberPad extends Vue {
     this.$emit("submit");
   }
   mounted() {
-    this.$eventBus.$on("saveSucced", () => {
-      console.log("监听到了");
+    (this as any).$eventBus.$on("saveSucced", () => {
       this.output = "0";
     });
   }
   beforeDestory() {
-    this.$eventBus.$off("saveSucced");
+    (this as any).$eventBus.$off("saveSucced");
   }
 }
 </script>

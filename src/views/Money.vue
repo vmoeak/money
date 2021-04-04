@@ -47,7 +47,7 @@ export default class Money extends Vue {
       this.record.amount = 0;
       this.record.tag = { name: "", id: "" };
       this.record.notes = "";
-      this.$eventBus.$emit("saveSucced");
+      (this as any).$eventBus.$emit("saveSucced");
     } else alert("保存失败");
   }
 }
