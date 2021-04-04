@@ -1,8 +1,16 @@
 const path = require('path');
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 
 module.exports = {
   lintOnSave: false,
+  configureWebpack: {
+    plugins: [
+      new AntdDayjsWebpackPlugin({
+        preset: 'antdv3'
+      })
+    ]
+  },
   chainWebpack: config => {
     const dir = path.resolve(__dirname, 'src/assets/icons');
 

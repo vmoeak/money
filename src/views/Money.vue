@@ -1,7 +1,8 @@
 <template>
   <div>
     <Layout class-fix="layout">
-      <tages :selected-labs.sync="record.tags" />
+      <tab :value.sync="record.type" class-fix="type" :data-source="typeList" />
+      <tages :seleted-tag.sync="record.tag" />
       <div class="input-wrapper">
         <input-form
           :value.sync="record.notes"
@@ -9,8 +10,7 @@
           place-holder="请输入备注"
         />
       </div>
-      <tab :value.sync="record.type" class-fix="type" :data-source="typeList" />
-      <number-pad :value.sync="record.amount" />
+      <number-pad :value.sync="record.amount" @submit="onSubmit" />
     </Layout>
   </div>
 </template>
@@ -29,7 +29,7 @@ import { typeList } from "@/constant";
 })
 export default class Money extends Vue {
   record: RecordItem = {
-    tags: [],
+    tag: { name: "", id: "" },
     notes: "",
     type: "-",
     amount: 0,
@@ -38,10 +38,17 @@ export default class Money extends Vue {
   created() {
     this.$store.commit("fetchRecordList");
   }
-  @Watch("record.amount")
   onSubmit() {
+    if (!this.record.tag.name) return alert("请选择标签");
+    if (!this.record.amount) return alert("请输入金额");
     this.$store.commit("createRecord", this.record);
-    this.$store.commit("saveRecordList");
+    if (this.$store.state.isSuccessCreate) {
+      alert("记录成功");
+      this.record.amount = 0;
+      this.record.tag = { name: "", id: "" };
+      this.record.notes = "";
+      this.$eventBus.$emit("saveSucced");
+    } else alert("保存失败");
   }
 }
 </script>

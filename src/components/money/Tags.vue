@@ -5,7 +5,7 @@
         v-for="tag in tagList"
         :key="tag.id"
         @click="toggle(tag)"
-        :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
+        :class="{ selected: tag === seletedTag }"
       >
         {{ tag.name }}
       </li>
@@ -21,8 +21,11 @@ import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
 import createTag from "@/mixins/createTag";
+
 @Component
 export default class Tags extends mixins(createTag) {
+  @Prop() seletedTag!: Tag;
+  currentTag = this.seletedTag;
   get tagList() {
     return this.$store.state.labelList;
   }
@@ -31,17 +34,18 @@ export default class Tags extends mixins(createTag) {
   created() {
     this.$store.commit("fetchLabelList");
   }
-  toggle(tag: string) {
-    const index = this.selectedTags.indexOf(tag);
-    if (index >= 0) {
-      this.selectedTags.splice(index, 1);
-      return;
-    }
-    this.selectedTags.push(tag);
+  toggle(tag: Tag) {
+    this.currentTag = tag;
+    // const index = this.selectedTags.indexOf(tag);
+    // if (index >= 0) {
+    //   this.selectedTags.splice(index, 1);
+    //   return;
+    // }
+    // this.selectedTags.push(tag);
   }
-  @Watch("selectedTags")
-  onUpdateSelectedTags(value: string[]) {
-    this.$emit("update:selectedLabs", value);
+  @Watch("currentTag")
+  onUpdateSelectedTags(value: Tag) {
+    this.$emit("update:seletedTag", value);
   }
 }
 </script>

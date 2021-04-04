@@ -8,6 +8,7 @@ type myState = {
   recordList: RecordItem[];
   labelList: Tag[];
   currentTag?: Tag;
+  isSuccessCreate: boolean;
 };
 
 export default new Vuex.Store({
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     recordList: [] as RecordItem[],
     labelList: [] as Tag[],
     currentTag: undefined,
+    isSuccessCreate: true,
   } as myState,
   mutations: {
     fetchRecordList(state) {
@@ -24,8 +26,14 @@ export default new Vuex.Store({
       localStorage.setItem("recordList", JSON.stringify(state.recordList));
     },
     createRecord(state, data: RecordItem) {
+      state.isSuccessCreate = true;
       data.time = new Date().toISOString();
-      state.recordList.push(clone(data));
+      try {
+        state.recordList.push(clone(data));
+        saveList("recordList", state.recordList);
+      } catch (error) {
+        state.isSuccessCreate = false;
+      }
     },
     fetchLabelList(state) {
       state.labelList = JSON.parse(localStorage.getItem("labelList") || "[]");
@@ -40,13 +48,13 @@ export default new Vuex.Store({
       };
       state.labelList.push(tag);
       alert("添加标签成功");
-      saveLabelList(state.labelList);
+      saveList("labelList", state.labelList);
     },
     removeLabel(state, id: string) {
       const index = state.labelList.findIndex((item) => item.id === id);
       if (index >= 0) {
         state.labelList.splice(index, 1);
-        saveLabelList(state.labelList);
+        saveList("labelList", state.labelList);
         alert("删除标签成功");
         router.back();
       } else {
@@ -62,7 +70,7 @@ export default new Vuex.Store({
       const index = state.labelList.findIndex((item) => item.id === id);
       if (index >= 0) {
         state.labelList[index].name = name;
-        saveLabelList(state.labelList);
+        saveList("labelList", state.labelList);
       } else {
         alert("未找到标签");
       }
@@ -75,6 +83,6 @@ export default new Vuex.Store({
   },
 });
 
-function saveLabelList(labelList: Tag[]) {
-  localStorage.setItem("labelList", JSON.stringify(labelList));
+function saveList(key: string, labelList: Tag[] | RecordItem[]) {
+  localStorage.setItem(key, JSON.stringify(labelList));
 }
