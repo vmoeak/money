@@ -141,7 +141,7 @@ export default class Statistic extends Vue {
         this.format = "YYYY";
         return "year";
     }
-    return;
+    return "";
   }
   get echartsLineData() {
     if (this.dateValue === "day") return {};
