@@ -39,6 +39,7 @@ export default {
   .content {
     flex-grow: 1;
     overflow: auto;
+    background: #fff;
   }
 }
 // 解决chrome浏览器视口计算不准问题

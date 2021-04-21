@@ -1,8 +1,13 @@
 <template>
   <div>
     <Layout class-fix="layout">
-      <tab :value.sync="record.type" class-fix="type" :data-source="typeList" />
       <tages :seleted-tag.sync="record.tag" />
+      <div class="date-picker-wrapper">
+        <a-date-picker
+          v-model="record.time"
+          placeholder="请选择日期"
+        ></a-date-picker>
+      </div>
       <div class="input-wrapper">
         <input-form
           :value.sync="record.notes"
@@ -10,6 +15,7 @@
           place-holder="请输入备注"
         />
       </div>
+      <tab :value.sync="record.type" class-fix="type" :data-source="typeList" />
       <number-pad :value.sync="record.amount" @submit="onSubmit" />
     </Layout>
   </div>
@@ -24,6 +30,7 @@ import NumberPad from "@/components/money/NumberPad.vue";
 import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
 import { typeList } from "@/constant";
+import dayjs from "dayjs";
 @Component({
   components: { Layout, Tages, InputForm, Tab, NumberPad },
 })
@@ -33,6 +40,7 @@ export default class Money extends Vue {
     notes: "",
     type: "-",
     amount: 0,
+    time: dayjs(new Date()),
   };
   typeList = typeList;
   created() {
@@ -54,12 +62,33 @@ export default class Money extends Vue {
 </script>
 <style lang="scss" scoped>
 .input-wrapper {
-  padding: 12px 0;
+  border: 1px solid #edeae4;
+  margin: 10px 20px 0;
+  border-radius: 5px;
 }
 ::v-deep {
   .layout-content {
     display: flex;
     flex-direction: column;
+  }
+}
+.date-picker-wrapper {
+  padding: 0 20px;
+  ::v-deep {
+    span {
+      display: block;
+    }
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      border: 0;
+      margin: 0;
+      padding: 10px 0;
+      padding-left: 16px;
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 5px;
+    }
   }
 }
 </style>

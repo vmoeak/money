@@ -56,7 +56,7 @@ export default class Echart extends Vue {
 .echart-wraper {
   overflow: auto;
   .echart {
-    height: 400px;
+    height: 260px;
   }
 }
 </style>

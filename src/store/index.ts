@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex, { Store } from "vuex";
 import { clone, createId } from "@/util";
 import router from "@/router";
+import dayjs from "dayjs";
 
 Vue.use(Vuex);
 type myState = {
@@ -27,7 +28,9 @@ export default new Vuex.Store({
     },
     createRecord(state, data: RecordItem) {
       state.isSuccessCreate = true;
-      data.time = new Date().toISOString();
+      if (!data.time) {
+        data.time = dayjs(new Date());
+      }
       try {
         state.recordList.push(clone(data));
         saveList("recordList", state.recordList);

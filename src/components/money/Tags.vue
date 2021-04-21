@@ -54,19 +54,23 @@ export default class Tags extends mixins(createTag) {
 .tags {
   background: #fff;
   font-size: 14px;
-  padding: 16px;
+  margin: 20px;
+  padding: 5px;
+  padding-left: 26px;
   flex-grow: 1;
   height: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border: 1px solid #eee;
+  border-radius: 5px;
   > .current {
     display: flex;
     flex-wrap: wrap;
     overflow: auto;
     margin-right: -5px;
     > li {
-      background: #d9d9d9;
+      background: #f0f0f0;
       height: 24px;
       line-height: 24px;
       border-radius: 12px;
@@ -74,18 +78,19 @@ export default class Tags extends mixins(createTag) {
       margin-right: 12px;
       margin-bottom: 4px;
       &.selected {
-        background: red;
+        background: #ffbc79;
+        color: #fff;
       }
     }
   }
   > .new {
     padding-top: 16px;
     button {
-      background: transparent;
+      background: #ffd8c2;
       border: none;
-      border-bottom: 1px solid;
-      padding: 0 4px;
-      color: #999;
+      border: 1px solid #eee;
+      padding: 4px 8px;
+      border-radius: 4px;
     }
   }
 }

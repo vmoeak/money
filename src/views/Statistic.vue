@@ -11,18 +11,21 @@
         class-fix="date"
         :data-source="dateList"
       ></tab>
-      <a-date-picker
-        :mode="pickerType"
-        :format="format"
-        :value="selectedDate"
-        :open="isOpen"
-        placeholder="请选择日期"
-        @focus="showPannel"
-        @panelChange="closePannel"
-        @change="closePannel"
-        @openChange="handleOpenChange"
-      >
-      </a-date-picker>
+      <div class="date-picker-wraper">
+        <a-date-picker
+          :mode="pickerType"
+          :format="format"
+          :value="selectedDate"
+          :open="isOpen"
+          @change="onChange"
+          @panelChange="onPannelChange"
+          @focus="onFocus"
+          @openChange="handleOpenChange"
+          placeholder="请选择日期"
+          inputReadOnly
+        >
+        </a-date-picker>
+      </div>
       <echart :echarts-data="echartsPieData"></echart>
       <echart
         v-if="dateValue === 'day' ? false : true"
@@ -296,15 +299,19 @@ export default class Statistic extends Vue {
     if (recordList.length === 0) return "";
     return recordList.reduce((sum, item) => sum + item.amount, 0).toString();
   }
-  showPannel() {
-    this.isOpen = true;
-  }
-  closePannel(value: any) {
-    if (!value) return;
-    this.selectedDate = value;
+
+  handleOpenChange(open: any) {
     this.isOpen = false;
   }
-  handleOpenChange(open: any) {
+  onChange(value: any) {
+    this.isOpen = false;
+    this.selectedDate = value;
+  }
+  onFocus() {
+    this.isOpen = true;
+  }
+  onPannelChange(value: any) {
+    this.selectedDate = value;
     this.isOpen = false;
   }
 }
@@ -312,9 +319,6 @@ export default class Statistic extends Vue {
 
 <style lang="scss" scoped>
 ::v-deep {
-  ul {
-    margin-bottom: 0;
-  }
   .type-item {
     background: #fff;
     &.selected {
@@ -347,6 +351,18 @@ export default class Statistic extends Vue {
     > .note {
       margin-right: auto;
       margin-left: 8px;
+    }
+  }
+}
+.date-picker-wraper {
+  ::v-deep {
+    span {
+      display: block;
+    }
+    input {
+      width: 100%;
+      border: none;
+      padding: 10px;
     }
   }
 }

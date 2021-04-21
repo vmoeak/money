@@ -41,26 +41,24 @@ export default class Types extends Vue {
 
 <style lang="scss" scoped>
 .types {
-  background: #c4c4c4;
   display: flex;
+  justify-content: space-between;
   text-align: center;
   font-size: 24px;
+  margin: 10px 20px;
   &-item {
-    width: 50%;
-    height: 64px;
+    width: 45%;
+    height: 56px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    &.selected:after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: #333;
-    }
+    background: #f0f0f0;
+    border-radius: 10px;
   }
+}
+.selected {
+  background: #ff9327;
+  color: #fff;
 }
 </style>

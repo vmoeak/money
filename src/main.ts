@@ -7,7 +7,7 @@ import Nav from "@/components/Nav.vue";
 import Layout from "@/components/Layout.vue";
 import Icon from "@/components/Icon.vue";
 import { DatePicker } from "ant-design-vue";
-import "ant-design-vue/lib/date-picker/style/css";
+import "ant-design-vue/lib/date-picker/style/index.css";
 Vue.component(DatePicker.name, DatePicker);
 Vue.component("Nav", Nav);
 Vue.component("Layout", Layout);
