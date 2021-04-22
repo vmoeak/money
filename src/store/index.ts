@@ -69,11 +69,16 @@ export default new Vuex.Store({
       const duplicatedIndex = state.labelList.findIndex(
         (item) => item.name === name
       );
-      if (duplicatedIndex >= 0) alert("标签名重复");
+      if (duplicatedIndex >= 0 && state.labelList[duplicatedIndex].id !== id) {
+        alert("标签名重复");
+        return;
+      }
       const index = state.labelList.findIndex((item) => item.id === id);
       if (index >= 0) {
         state.labelList[index].name = name;
         saveList("labelList", state.labelList);
+        alert("编辑标签成功");
+        router.back();
       } else {
         alert("未找到标签");
       }

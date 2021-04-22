@@ -11,7 +11,7 @@
           </li>
         </ul>
         <div class="create-tag-wrapper">
-          <Button @click="createLabel"> 新增标签 </Button>
+          <Button @click="createLabel" class="new-tag"> 新增标签 </Button>
         </div>
       </div>
     </Layout>
@@ -19,7 +19,6 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
 import createTag from "@/mixins/createTag";
@@ -43,16 +42,20 @@ export default class Label extends mixins(createTag) {
   height: 0;
   .tagList {
     background: #fff;
-    padding-left: 16px;
+    padding: 20px 40px 20px;
     overflow: auto;
     > li {
       > .tag {
-        min-height: 44px;
+        min-height: 56px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 1px solid #e6e6e6;
+        padding-left: 16px;
+        border: 1px solid #e6e6e6;
+        border-radius: 5px;
+        margin-bottom: 10px;
         color: black;
+        background: #f7f6fb;
         > svg {
           margin-right: 16px;
           height: 18px;
@@ -64,7 +67,10 @@ export default class Label extends mixins(createTag) {
   }
   .create-tag-wrapper {
     text-align: center;
-    margin-top: 44px;
+    padding-top: 44px;
+    .new-tag {
+      background: #dc4f89;
+    }
   }
   .create-tag-wrapper::after {
     content: "";

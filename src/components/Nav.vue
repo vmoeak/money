@@ -25,9 +25,9 @@ export default {
 @import "~@/assets/style/helper.scss";
 nav {
   display: flex;
-  @extend %outerShadow;
   font-size: 12px;
   background: #fff;
+  border-top: 1px solid #eee;
   .item {
     width: 33.333%;
     display: flex;

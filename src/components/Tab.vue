@@ -45,10 +45,10 @@ export default class Types extends Vue {
   justify-content: space-between;
   text-align: center;
   font-size: 24px;
-  margin: 10px 20px;
+  margin: 10px 20px 0;
   &-item {
     width: 45%;
-    height: 56px;
+    height: 46px;
     display: flex;
     justify-content: center;
     align-items: center;
