@@ -91,7 +91,7 @@ export default class EditLabel extends Vue {
 }
 .button-wrapper {
   Button {
-    background: #dc4f89;
+    background: #ff9327;
   }
   .save-edit {
     margin-right: 30px;

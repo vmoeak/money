@@ -2,15 +2,15 @@
   <nav>
     <router-link to="/money" class="item" active-class="selected">
       <icon name="label"></icon>
-      money
+      记账
     </router-link>
     <router-link to="/labels" class="item" active-class="selected">
       <icon name="money"></icon>
-      labels
+      标签
     </router-link>
     <router-link to="/statistic" class="item" active-class="selected">
       <icon name="statistics"></icon>
-      static
+      统计
     </router-link>
   </nav>
 </template>

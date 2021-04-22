@@ -69,7 +69,7 @@ export default class Label extends mixins(createTag) {
     text-align: center;
     padding-top: 44px;
     .new-tag {
-      background: #dc4f89;
+      background: #ff9327;
     }
   }
   .create-tag-wrapper::after {

@@ -86,7 +86,8 @@ export default class Tags extends mixins(createTag) {
   > .new {
     padding-top: 16px;
     button {
-      background: #ffd8c2;
+      background: #ff9327;
+      color: #fff;
       border: none;
       border: 1px solid #eee;
       padding: 4px 8px;
