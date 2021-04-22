@@ -26,12 +26,18 @@
         >
         </a-date-picker>
       </div>
-      <echart :echarts-data="echartsPieData"></echart>
-      <echart
-        v-if="dateValue === 'day' ? false : true"
-        :echarts-data="echartsLineData"
-      ></echart>
-      <ul>
+      <div class="icon" v-if="resultList.length === 0">
+        <icon name="nodata" class="icon-data"></icon>
+        <p>暂无数据</p>
+      </div>
+      <div v-else>
+        <echart :echarts-data="echartsPieData"></echart>
+        <echart
+          v-if="dateValue === 'day' ? false : true"
+          :echarts-data="echartsLineData"
+        ></echart>
+      </div>
+      <ul class="record-list">
         <li class="record" v-for="record in resultList" :key="record.title">
           <div class="record-title">
             <span>{{ beautifyTitle(record.title) }}</span>
@@ -186,18 +192,16 @@ export default class Statistic extends Vue {
       }
     }
     return {
-      // title: {
-      //   text: "ECharts Getting Started Example",
-      // },
       grid: {
         top: 100,
-        left: 5,
-        right: 5,
+        left: 10,
+        right: 10,
+        bottom: 40,
       },
       tooltip: {
         show: true,
         trigger: "item",
-        backgroundColor: "#007fff",
+        backgroundColor: "#fff",
         className: "toolTip-costum",
         borderColor: "transparent",
         padding: 0,
@@ -214,7 +218,7 @@ export default class Statistic extends Vue {
           <div class="tooltip-amount" style="text-align: center; font-size: 12px">
             <span>￥${params.data}</span>
           </div>
-          <div style="border-left: 10px solid transparent;border-right: 10px solid transparent;border-top: 10px solid #007fff;position: absolute; left: 50%; bottom: -9px; transform: translateX(-50%); filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, .2));"></div>
+          <div style="border-left: 10px solid transparent;border-right: 10px solid transparent;border-top: 10px solid #fff;position: absolute; left: 50%; bottom: -9px; transform: translateX(-50%); filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, .2));"></div>
         </div>
       `;
           return str;
@@ -320,16 +324,13 @@ export default class Statistic extends Vue {
 <style lang="scss" scoped>
 ::v-deep {
   .type-item {
-    background: #fff;
-    &.selected {
-      background: #eee;
-      &::after {
-        display: none;
-      }
-    }
   }
   .date-item {
     height: 40px;
+    margin-right: 5px;
+  }
+  .date-item:last-child {
+    margin-right: 0;
   }
 }
 %item {
@@ -339,6 +340,9 @@ export default class Statistic extends Vue {
   justify-content: space-between;
 }
 .record {
+  border: 1px solid #eee;
+  border-radius: 5px;
+  margin-bottom: 10px;
   &-title {
     @extend %item;
   }
@@ -355,15 +359,31 @@ export default class Statistic extends Vue {
   }
 }
 .date-picker-wraper {
+  border: 1px solid #eee;
+  margin: 10px 20px 0;
+  border-radius: 10px;
+  overflow: hidden;
   ::v-deep {
     span {
       display: block;
     }
     input {
-      width: 100%;
       border: none;
       padding: 10px;
     }
   }
+}
+.icon {
+  width: 50%;
+  margin: 30px auto;
+  text-align: center;
+  .icon-data {
+    width: 100%;
+    height: auto;
+    color: #edccb8;
+  }
+}
+.record-list {
+  margin: 0 20px;
 }
 </style>

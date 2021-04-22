@@ -55,6 +55,9 @@ export default class Echart extends Vue {
 // echart 加载时容器要初始化宽高
 .echart-wraper {
   overflow: auto;
+  margin: 10px 20px;
+  border: 1px solid #eee;
+  border-radius: 10px;
   .echart {
     height: 260px;
   }
