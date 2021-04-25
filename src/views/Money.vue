@@ -62,9 +62,8 @@ export default class Money extends Vue {
 </script>
 <style lang="scss" scoped>
 .input-wrapper {
-  border: 1px solid #edeae4;
-  margin: 10px 20px 0;
-  border-radius: 5px;
+  // border: 1px solid #edeae4;
+  background: #f3eeeb;
 }
 ::v-deep {
   .layout-content {
@@ -74,7 +73,12 @@ export default class Money extends Vue {
 }
 .date-picker-wrapper {
   padding: 0 20px;
+  margin-bottom: 2px;
+  background: #f3eeeb;
   ::v-deep {
+    svg {
+      background: #f3eeeb;
+    }
     span {
       display: block;
     }
@@ -84,10 +88,7 @@ export default class Money extends Vue {
       border: 0;
       margin: 0;
       padding: 10px 0;
-      padding-left: 16px;
-      background: #fff;
-      border: 1px solid #eee;
-      border-radius: 5px;
+      background: #f3eeeb;
     }
   }
 }

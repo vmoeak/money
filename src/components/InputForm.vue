@@ -28,7 +28,7 @@ export default class Note extends Vue {
   font-size: 14px;
   display: block;
   display: flex;
-  padding-left: 16px;
+  padding-left: 20px;
   align-items: center;
   .name {
     padding-right: 16px;

@@ -42,11 +42,11 @@ export default class Label extends mixins(createTag) {
   flex-grow: 1;
   height: 0;
   .title {
-    height: 50px;
     text-align: center;
-    background: #edccb8;
-    line-height: 50px;
-    font-size: 20px;
+    padding: 20px 0;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    margin: 0 10px;
   }
   .tagList {
     background: #fff;
@@ -54,7 +54,7 @@ export default class Label extends mixins(createTag) {
     overflow: auto;
     > li {
       > .tag {
-        min-height: 56px;
+        min-height: 44px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -63,7 +63,7 @@ export default class Label extends mixins(createTag) {
         border-radius: 5px;
         margin-bottom: 10px;
         color: black;
-        background: #f7f6fb;
+        background: #f3eeeb;
         > svg {
           margin-right: 16px;
           height: 18px;
