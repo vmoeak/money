@@ -2,6 +2,7 @@
   <div>
     <Layout class-fix="label">
       <div class="content-wrapper">
+        <div class="title">管理标签</div>
         <ul class="tagList">
           <li v-for="label in labelList" :key="label.id">
             <router-link :to="`/labels/edit/${label.id}`" class="tag">
@@ -40,9 +41,16 @@ export default class Label extends mixins(createTag) {
 .content-wrapper {
   flex-grow: 1;
   height: 0;
+  .title {
+    height: 50px;
+    text-align: center;
+    background: #edccb8;
+    line-height: 50px;
+    font-size: 20px;
+  }
   .tagList {
     background: #fff;
-    padding: 20px 40px 20px;
+    padding: 20px;
     overflow: auto;
     > li {
       > .tag {

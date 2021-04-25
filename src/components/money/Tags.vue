@@ -35,13 +35,12 @@ export default class Tags extends mixins(createTag) {
     this.$store.commit("fetchLabelList");
   }
   toggle(tag: Tag) {
+    console.log("tag:");
+    if (this.currentTag === tag) {
+      this.currentTag = { name: "", id: "" };
+      return;
+    }
     this.currentTag = tag;
-    // const index = this.selectedTags.indexOf(tag);
-    // if (index >= 0) {
-    //   this.selectedTags.splice(index, 1);
-    //   return;
-    // }
-    // this.selectedTags.push(tag);
   }
   @Watch("currentTag")
   onUpdateSelectedTags(value: Tag) {
@@ -54,16 +53,13 @@ export default class Tags extends mixins(createTag) {
 .tags {
   background: #fff;
   font-size: 14px;
-  margin: 20px;
-  padding: 5px;
-  padding-left: 26px;
+  margin: 20px 0;
+  padding: 5px 20px;
   flex-grow: 1;
   height: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid #eee;
-  border-radius: 5px;
   > .current {
     display: flex;
     flex-wrap: wrap;
@@ -76,9 +72,9 @@ export default class Tags extends mixins(createTag) {
       border-radius: 12px;
       padding: 0 16px;
       margin-right: 12px;
-      margin-bottom: 4px;
+      margin-bottom: 8px;
       &.selected {
-        background: #ffbc79;
+        background: #ff9327;
         color: #fff;
       }
     }

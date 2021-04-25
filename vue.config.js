@@ -23,12 +23,12 @@ module.exports = {
     config.plugin('svg-sprite').use(require('svg-sprite-loader/plugin'), [{plainSprite: true}])
     config.module.rule('svg').exclude.add(dir)
   },
-  devServer: {
-    public: '192.168.2.166:8080',//修改这里
-    https: false,
-    hotOnly: false,
-  },
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/money-website/'
-    : '/'
+  // devServer: {
+  //   public: '192.168.2.166:8080',//修改这里
+  //   https: false,
+  //   hotOnly: false,
+  // },
+  // publicPath: process.env.NODE_ENV === 'production'
+  //   ? '/money-website-1/'
+  //   : '/'
 }
